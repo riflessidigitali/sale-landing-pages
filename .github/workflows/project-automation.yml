@@ -21,7 +21,7 @@ env:
   PROJECT_ORG: riflessidigitali
   PRIMARY_CODEOWNER: "@eri-trabiccolo"
   PROJECT_ID: 6
-  ISSUE_MANAGE_PAT: ${{ secrets.IP_ISSUE_MANAGE_PAT_1 }}
+  ISSUE_MANAGE_PAT: ${{ secrets.IP_ISSUE_MANAGE_PAT }}
 
 jobs:
 
