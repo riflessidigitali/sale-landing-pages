@@ -44,8 +44,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php: ${{ fromJson(PHP_VERSIONS) }}
-        wp: ${{ fromJson(WP_VERSIONS) }}
+        php: ${{ fromJson(env.PHP_VERSIONS) }}
+        wp: ${{ fromJson(env.WP_VERSIONS) }}
 
     name: PHP ${{ matrix.php }} (with WP ${{ matrix.wp }})
 
