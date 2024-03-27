@@ -31,9 +31,9 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ fromJson(vars.WP_VERSIONS)[0] }}
     steps:
-      - name: Check out to prepare the matrix
-        uses: actions/checkout@v3
+      - name: Prepare Matrix
         run: |
+          echo WP_VERSIONS
           echo WP_VERSIONS="${WP_VERSIONS%]*}, nightly" >> $GITHUB_ENV
           echo WP_VERSIONS
 
