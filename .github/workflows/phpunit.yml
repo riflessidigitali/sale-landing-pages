@@ -40,7 +40,7 @@ jobs:
   tests:
     needs: matrix_prep
     runs-on: ubuntu-latest
-    continue-on-error: ${{ matrix.wp == nightly }}
+    continue-on-error: ${{ matrix.wp == 'nightly' }}
     strategy:
       fail-fast: false
       matrix:
