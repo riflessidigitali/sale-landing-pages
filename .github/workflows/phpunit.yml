@@ -22,6 +22,8 @@ concurrency:
   group: ${{ github.workflow }}-${{ 'pull_request' == github.event_name && github.head_ref || github.sha }}
   cancel-in-progress: true
 
+env:
+  VARS: ${{ vars }}
 jobs:
   tests:
     runs-on: ubuntu-latest
@@ -42,7 +44,7 @@ jobs:
           
       - name: mm
         run: |
-          echo $GITHUB_ENV
+          echo $VARS
           
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
