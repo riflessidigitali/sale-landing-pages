@@ -33,7 +33,7 @@ jobs:
         wp: ${{ fromJson(vars.WP_VERSIONS) }}
         experimental: [false]
         include:
-            - wp: ${{ (false !== fromJson(vars.WP_VERSIONS)[0]) && 'nightly' }}
+            - wp: ${{ (false != fromJson(vars.WP_VERSIONS)[0]) && 'nightly' }}
               experimental: true
 
 
