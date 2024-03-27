@@ -33,8 +33,8 @@ jobs:
         wp: ${{ fromJson(vars.WP_VERSIONS) }}
         experimental: [false]
         include:
-            - wp: 'nightly'
-              experimental: false !== ${{ fromJson(vars.WP_VERSIONS)[0] }}
+            - wp: ${{ (false !== fromJson(vars.WP_VERSIONS)[0]) && 'nightly' }}
+              experimental: true
 
 
     name: PHP ${{ matrix.php }} (with WP ${{ matrix.wp }})
