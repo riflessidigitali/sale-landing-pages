@@ -33,9 +33,7 @@ jobs:
     steps:
       - name: Prepare Matrix
         run: |
-          echo WP_VERSIONS
           echo WP_VERSIONS="${WP_VERSIONS%]*}, nightly" >> $GITHUB_ENV
-          echo WP_VERSIONS
 
   tests:
     needs: matrix_prep
@@ -44,8 +42,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        wp: ${{ fromJson(env.WP_VERSIONS) }}      
         php: ${{ fromJson(env.PHP_VERSIONS) }}
-        wp: ${{ fromJson(env.WP_VERSIONS) }}
 
     name: PHP ${{ matrix.php }} (with WP ${{ matrix.wp }})
 
