@@ -22,19 +22,6 @@ concurrency:
   group: ${{ github.workflow }}-${{ 'pull_request' == github.event_name && github.head_ref || github.sha }}
   cancel-in-progress: true
 
-env:
-  PHP_VERSIONS: ${{ vars.PHP_VERSIONS }}
-  WP_VERSIONS: ${{ vars.WP_VERSIONS }}
-
-jobs:
-  prepare-matrix:
-    runs-on: ubuntu-latest
-    if: ${{ fromJson(vars.WP_VERSIONS)[0] }}
-    steps:
-      - name: Prepare Matrix
-        run: |
-          echo WP_VERSIONS="${WP_VERSIONS%]*}, nightly" >> $GITHUB_ENV
-
   tests:
     needs: matrix_prep
     runs-on: ubuntu-latest
@@ -42,8 +29,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        wp: ${{ fromJson(env.WP_VERSIONS) }}      
-        php: ${{ fromJson(env.PHP_VERSIONS) }}
+        wp: ${{ fromJson(vars.WP_VERSIONS) }}      
+        php: ${{ fromJson(vars.PHP_VERSIONS) }}
 
     name: PHP ${{ matrix.php }} (with WP ${{ matrix.wp }})
 
