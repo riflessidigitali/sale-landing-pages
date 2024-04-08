@@ -22,30 +22,15 @@ concurrency:
   group: ${{ github.workflow }}-${{ 'pull_request' == github.event_name && github.head_ref || github.sha }}
   cancel-in-progress: true
 
-env:
-  PHP_VERSIONS: ${{ vars.PHP_VERSIONS }}
-  WP_VERSIONS: ${{ vars.WP_VERSIONS }}
-
 jobs:
-  prepare-matrix:
-    runs-on: ubuntu-latest
-    if: ${{ fromJson(vars.WP_VERSIONS)[0] }}
-    steps:
-      - name: Prepare Matrix
-        run: |
-          echo WP_VERSIONS
-          echo WP_VERSIONS="${WP_VERSIONS%]*}, nightly" >> $GITHUB_ENV
-          echo WP_VERSIONS
-
   tests:
-    needs: matrix_prep
     runs-on: ubuntu-latest
-    continue-on-error: ${{ matrix.wp == nightly }}
+    continue-on-error: ${{ matrix.wp == 'nightly' }}
     strategy:
       fail-fast: false
       matrix:
-        php: ${{ fromJson(PHP_VERSIONS) }}
-        wp: ${{ fromJson(WP_VERSIONS) }}
+        php: ${{ fromJson(vars.PHP_VERSIONS) }}
+        wp: ${{ fromJson(vars.WP_VERSIONS) }}
 
     name: PHP ${{ matrix.php }} (with WP ${{ matrix.wp }})
 
@@ -89,7 +74,7 @@ jobs:
           root-password: 'password'
 
       - name: Install test dependencies
-        if: ${{ fromJson(vars.WP_VERSIONS)[0] && matrix.wp }} # At least one WP to be tested (`nightly` excluded).
+        if: ${{ matrix.wp }} # At least one WP to be tested.
         run: composer run install:wp -- --version "${{ matrix.wp }}" --host "127.0.0.1:3306"
 
       - name: Run tests
