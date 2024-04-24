@@ -8,5 +8,5 @@
 	<!-- Strip the filepaths down to the relevant bit. -->
 	<arg name="basepath" value="./../"/>
 
-    <rule ref="WordPress-Core"/>
+    <rule ref="WordPress"/>
 </ruleset>
