@@ -1,1 +1,12 @@
+<?xml version="1.0"?>
+<ruleset name="Member Desk" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="vendor/squizlabs/php_codesniffer/phpcs.xsd">
+    <description>PHPCS Ruleset</description>
 
+    <!-- Process all directories -->
+    <file>.</file>
+
+	<!-- Strip the filepaths down to the relevant bit. -->
+	<arg name="basepath" value="./../"/>
+
+    <rule ref="WordPress-Core"/>
+</ruleset>
