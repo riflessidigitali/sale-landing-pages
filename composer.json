@@ -1,0 +1,22 @@
+{
+    "name": "blbabla",    
+    "type": "library",
+    "license": "GPL-3.0",
+    "config": {
+        "lock": false,
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    },
+    "require": {
+        "php": ">=7.2"
+    },
+    "require-dev": {
+        "wp-coding-standards/wpcs": "^3.0"        
+    },
+    "scripts": {
+        "cs-check": "./vendor/bin/phpcs",
+        "cs-fix": "./vendor/bin/phpcbf",
+        "cs-check-errors": "@cs-check --error-severity=1 --warning-severity=6"
+    }
+}
