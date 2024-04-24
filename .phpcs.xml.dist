@@ -5,7 +5,7 @@
     <!-- Process all directories -->
     <file>.</file>
 
-	<!-- Strip the filepaths down to the relevant bit. -->
+    <!-- Strip the filepaths down to the relevant bit. -->
     <arg name="basepath" value="./../"/>
     
     <rule ref="WordPress"/>
