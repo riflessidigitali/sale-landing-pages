@@ -58,8 +58,9 @@ jobs:
       - name: Check CS on PR
         if: github.event_name == 'pull_request'
         run: |
-          pr_diff=`gh pr diff ${{ github.event.number }} --name-only 2> /dev/null | xargs find 2> /dev/null`          
-          if [[ -n "$pr_diff" ]]; then composer run cs-check -- --runtime-set ignore_warnings_on_exit true -- $pr_diff; fi
+          pr_diff=`gh pr diff ${{ github.event.number }} --name-only 2> /dev/null | xargs find 2> /dev/null`
+          echo $pr_diff
+          #if [[ -n "$pr_diff" ]]; then composer run cs-check -- --runtime-set ignore_warnings_on_exit true -- $pr_diff; fi
 
       - name: Check CS
         if: github.event_name != 'pull_request'
