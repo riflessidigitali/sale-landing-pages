@@ -60,7 +60,7 @@ jobs:
         env:
           PR_NUMBER: ${{ github.event.number }}
           GH_TOKEN: ${{ secrets.CSPF_REPO_READ_PAT }}
-        run: pr_diff=$(gh pr diff ${PR_NUMBER} --name-only 2> /dev/null | xargs find 2> /dev/null) && echo ${pr_diff}
+        run: pr_diff=$(gh pr diff ${PR_NUMBER} --name-only 2> /dev/null) && echo ${pr_diff}
 
       - name: Check CS
         if: github.event_name != 'pull_request'
