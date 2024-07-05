@@ -61,7 +61,8 @@ jobs:
           PR_NUMBER: ${{ github.event.number }}
           GH_TOKEN: ${{ secrets.CSPF_REPO_READ_PAT }}
         run: |
-          gh pr diff ${PR_NUMBER} --name-only | xargs find 2> /dev/null
+          # Run only on changed existing files (see the `find` part below ) if any (xarg -r)
+          gh pr diff ${PR_NUMBER} --name-only | xargs find 2> /dev/null | xargs -r composer run cs-check -- --runtime-set ignore_warnings_on_exit true
 
       - name: Check CS
         if: github.event_name != 'pull_request'
