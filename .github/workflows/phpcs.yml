@@ -60,7 +60,7 @@ jobs:
         env:
           PR_NUMBER: ${{ github.event.number }}
           GH_TOKEN: ${{ secrets.CSPF_REPO_READ_PAT }}
-        run: pr_diff=$(gh pr diff ${PR_NUMBER} --name-only 2>/dev/null); toCheck=""; for file in $pr_diff; do if [ -f "$file" ]; then toCheck="${toCheck} ${file}"; fi; done; if [ -n "$toCheck" ]; then composer run cs-check -- --runtime-set ignore_warnings_on_exit ${toCheck}; fi
+        run: pr_diff=$(gh pr diff ${PR_NUMBER} --name-only 2>/dev/null); toCheck=""; for file in $pr_diff; do if [ -f "$file" ]; then toCheck="${toCheck} ${file}"; fi; done; if [ -n "$toCheck" ]; then composer run cs-check -- --runtime-set ignore_warnings_on_exit true ${toCheck}; fi; echo $toCheck
 
 
       - name: Check CS
