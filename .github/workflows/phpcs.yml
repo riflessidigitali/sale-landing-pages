@@ -61,9 +61,8 @@ jobs:
         if: ${{ env.RUN_ON_CHANGESET == 'true' }}
         env:
           PR_NUMBER: ${{ github.event.number }}
-          GH_TOKEN: ${{ secrets.CSPF_REPO_READ_PAT }}
-        with:
-          shell: bash {0}
+          GH_TOKEN: ${{ secrets.CSPF_REPO_READ_PAT }}        
+        shell: bash {0}
         run: |
           CHANGESET=`gh pr diff ${PR_NUMBER} --name-only`
           if [[ $? -eq 0 ]]; then
