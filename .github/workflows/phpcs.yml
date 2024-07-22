@@ -20,7 +20,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  RUN_ON_CHANGESET: ${{ github.event_name !== 'pull_request' }}
+  RUN_ON_CHANGESET: ${{ github.event_name != 'pull_request' }}
   
 jobs:
   tests:
