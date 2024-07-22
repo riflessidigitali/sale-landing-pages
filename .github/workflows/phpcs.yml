@@ -19,10 +19,12 @@ concurrency:
   group: ${{ github.workflow }}-${{ 'pull_request' == github.event_name && github.head_ref || github.sha }}
   cancel-in-progress: true
 
+env:
+  RUN_ON_CHANGESET: ${{ github.event_name !== 'pull_request' }}
+  
 jobs:
   tests:
     runs-on: ubuntu-latest
-
     name: PHP Coding Standards
 
     steps:
@@ -56,14 +58,18 @@ jobs:
         run: composer update
 
       - name: Check CS on PR
-        if: github.event_name == 'pull_request'
+        if: ${{ env.RUN_ON_CHANGESET == 'true' }}
         env:
           PR_NUMBER: ${{ github.event.number }}
           GH_TOKEN: ${{ secrets.CSPF_REPO_READ_PAT }}
         run: |
           # Run only on changed existing files (see the `find` part below ) if any (xarg -r)
-          gh pr diff ${PR_NUMBER} --name-only | xargs find 2> /dev/null | xargs -r composer run cs-check -- --runtime-set ignore_warnings_on_exit true
+          CHANGESET=`gh pr diff ${PR_NUMBER} --name-only`
+          if [[ $? -eq 0 ]]; then 
+            echo $CHANGESET | xargs find 2> /dev/null | xargs -r composer run cs-check -- --runtime-set ignore_warnings_on_exit true
+            echo RUN_ON_CHANGESET='false' >> $GITHUB_ENV
+          fi
 
       - name: Check CS
-        if: github.event_name != 'pull_request'
+        if: ${{ env.RUN_ON_CHANGESET == 'false' }}
         run: composer run cs-check -- --runtime-set ignore_warnings_on_exit true
