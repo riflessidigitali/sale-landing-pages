@@ -67,6 +67,7 @@ jobs:
           CHANGESET=`gh pr diff ${PR_NUMBER} --name-only`
           if [[ $? -eq 0 ]]; then 
             echo $CHANGESET | xargs find 2> /dev/null | xargs -r composer run cs-check -- --runtime-set ignore_warnings_on_exit true
+          else # An error occurred, e.g. the number of changed files exceeded the limit (300)
             echo RUN_ON_CHANGESET='false' >> $GITHUB_ENV
           fi
 
