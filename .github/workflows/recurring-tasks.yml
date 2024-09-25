@@ -21,8 +21,8 @@ jobs:
           TITLE: '[Recurring] Plugin and Theme updates'
           BODY: |
             Perform Plugin and Theme updates on the website.
-            Due by: $(date --date="next fri 22 UTC")
-            
+            Due by: $(date -d "next fri 22 UTC")
+            Due by: $(date -d "+2 weeks")
         run: |
           PREV_ISSUE_NUM=$(gh issue list --search "$TITLE" --state open --json number --jq '.[0].number')
           if [[ -n $PREV_ISSUE_NUM ]]; then
