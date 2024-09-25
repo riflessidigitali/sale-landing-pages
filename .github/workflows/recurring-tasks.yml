@@ -23,7 +23,6 @@ jobs:
           DATE: $(date -d "next fri 22 UTC")
           BODY: |
             Perform Plugin and Theme updates on the website.
-            Due by: ${{ DATE }}
             Due by: `date -d "next fri 22 UTC"`
             Due by: ${{ $(date -d "next fri 22 UTC") }}
             Due by: ${{ $(date -d "next fri 22 UTC") }}
