@@ -9,9 +9,6 @@ jobs:
   create-issue:
     name: Create issue
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      issues: write
     steps:
       - name: Set issue due date
         run: echo "ISSUE_DUE_DATE=$(date -d "next fri 22 UTC")" >> $GITHUB_ENV
