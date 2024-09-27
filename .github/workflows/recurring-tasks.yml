@@ -20,7 +20,9 @@ jobs:
           DATE: $(date -d "next fri 22 UTC")
           BODY: |
             Perform Plugin and Theme updates on the website.
+
             Due by: ${{ env.ISSUE_DUE_DATE }}
+
         run: |
           PREV_ISSUE_NUM=$(gh issue list --search "$TITLE" --state open --json number --jq '.[0].number')
           if [[ -n $PREV_ISSUE_NUM ]]; then
