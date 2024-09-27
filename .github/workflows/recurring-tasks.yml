@@ -14,7 +14,7 @@ jobs:
         run: echo "ISSUE_DUE_DATE=$(date -d "next fri 22 UTC")" >> $GITHUB_ENV
       - name: Create issue
         env:
-          GH_TOKEN: ${{ secrets.IPJ_ISSUE_MANAGE_PAT }}
+          GH_TOKEN: ${{ secrets.IP_ISSUE_MANAGE_PAT }}
           GH_REPO: ${{ github.repository }}
           TITLE: '[Recurring] Plugin and Theme updates'
           DATE: $(date -d "next fri 22 UTC")
