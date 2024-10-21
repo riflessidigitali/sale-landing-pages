@@ -75,6 +75,7 @@ jobs:
 
       - name: Check CS on PR
         if: ${{ env.RUN_ON_CHANGESET == 'true' }}
+        shell: bash {0} # Needed b/c by default of the fast-failure behavior of the github shell.        
         run: |
           echo env.CHANGESET | xargs find 2> /dev/null | xargs -r composer run cs-check -- --runtime-set ignore_warnings_on_exit true
 
