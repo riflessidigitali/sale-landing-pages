@@ -21,7 +21,7 @@ env:
   PROJECT_ORG: caseproof
   PRIMARY_CODEOWNER: "@eri-trabiccolo"
   PROJECT_ID: 6
-  ISSUE_MANAGE_PAT: ${{ secrets.IP_ISSUE_MANAGE_PAT }}
+  ISSUE_MANAGE_PAT: ${{ env.GITHUB_TOKEN }}
 
 jobs:
 
